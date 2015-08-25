@@ -17,7 +17,27 @@ if(isset($_GET['acao']) && $_GET['acao'] == "editar"){
 
 	include('exemplo.2.6.form.php');
 
-	} else {
+	} else if(isset($_GET['acao']) && $_GET['acao'] == "deletar") {
+
+
+		if($bd->delete('articles', 'id', $resultado[$posicao]['id'] ) ){
+			echo "removido";
+		} else {
+			echo "seja brasileiro e tente outra vez";
+		}
+
+
+} else {
+
+
+session_start();
+
+
+if(isset($_SESSION['status'])){
+	echo $_SESSION['mensagem'];
+}
+
+session_destroy();
 
 ?>
 <table border=1>
@@ -34,14 +54,14 @@ if(isset($_GET['acao']) && $_GET['acao'] == "editar"){
 <?php foreach( $resultado as $pos => $item ){ ?>
 
 		<tr>
-			<td><?= $item['id'] ?></td>
-			<td><?= $item['title'] ?></td>
-			<td><?= $item['body'] ?></td>
+			<td><?php echo $item['id']; ?></td>
+			<td><?php echo  $item['title']; ?></td>
+			<td><?php echo  $item['body']; ?></td>
 			<td>
-				<a href="?posicao=<?= $pos ?>&acao=editar">editar</a>
+				<a href="?posicao=<?php echo  $pos; ?>&acao=editar">editar</a>
 			</td>
 			<td>
-				<a href="?posicao=<?= $pos ?>&acao=deletar">deletar</a>
+				<a onclick="return confirm('Vc tem certeza?')" href="?posicao=<?php echo  $pos; ?>&acao=deletar">deletar</a>
 			</td>
 		</tr>
 

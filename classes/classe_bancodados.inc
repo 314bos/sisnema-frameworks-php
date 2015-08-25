@@ -83,8 +83,6 @@ abstract class BancoDados {
 	}
 
 	public function atualizar($tableName, $colunaReferencia, $valorReferencia, $valoresParaAtualizar){
-
-
 $arrValoresParaAtualizar = array();
 
 foreach($valoresParaAtualizar as $chave => $valor){
@@ -99,13 +97,21 @@ $strSql = "UPDATE $tableName
 			SET $strValoresParaAtualizar
 			WHERE $colunaReferencia=$valorReferencia";
 
-// @TODO: incluir startTransaction
-// @TODO: incluir executaSQL armazenando o retorno
-// @TODO: se executaSQL retornar sucesso, commit, se falha, ROLLBACK
-// @TODO: retornar o resultado do executaSQL (return)
 
+			$this->startTransaction();
 
-return $strSql;
+$statusDoExecutaSql = $this->executaSQL($strSql);
+
+if( $statusDoExecutaSql ){
+
+$this->commit();
+
+} else {
+
+$this->ROLLBACK();
+}
+
+return $statusDoExecutaSql;
 	}
 
 
@@ -133,6 +139,13 @@ return $strSql;
 		$this->SetNumRows($retorno);
 		$this->SetResult($retorno);
 		return $retorno;
+
+	}
+
+	public function delete($tableName, $someColumn, $id){
+
+		return $this->executaSQL("DELETE FROM $tableName
+WHERE $someColumn = $id");
 
 	}
 
@@ -262,7 +275,7 @@ return $strSql;
 		);
 
 
-		
+
 		
 		} else {
 		
