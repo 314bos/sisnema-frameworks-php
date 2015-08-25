@@ -75,10 +75,13 @@ class tipospadrao {
 }
 
 public function getTipo($_tipo) {
+
+
+
+	return $this->_tipos[$_tipo];
 }
 }
 
-$variavelQualquer = new tipotag();
 
 
 
