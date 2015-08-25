@@ -32,6 +32,34 @@ class tipotag {
 
 }
 
+
+
+/**
+ * Define um Atributo para o marcador html relacionado
+ *
+ */
+class atributo {
+    protected $_nome;
+    protected $_valor;
+
+    public function __construct() {
+
+    }
+
+    public function getAtributo() {
+
+    }
+
+    public function getNome() {
+
+    }
+
+    public function getValor() {
+
+    }
+}
+
+
 class tipospadrao {
     private $_tipos = Array();
 
