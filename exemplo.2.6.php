@@ -21,7 +21,7 @@ if(isset($_GET['acao']) && $_GET['acao'] == "editar"){
 
 
 		if($bd->delete('articles', 'id', $resultado[$posicao]['id'] ) ){
-			echo "removido";
+			header('location:exemplo.2.6.php');
 		} else {
 			echo "seja brasileiro e tente outra vez";
 		}
