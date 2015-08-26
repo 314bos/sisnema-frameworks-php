@@ -1,5 +1,34 @@
 <?php
+/**
+ * Classe para gerenciamento de HTML
+ *
+ */
+class html {
+    protected $_tags = Array();
+    protected $_otimizado = true;
 
+    public function addTag(tag $_tag) {
+        $this->_tags[] = $_tag;
+        return sizeof($this->_tags)-1;
+    }
+
+    public function setOtimizado($_ot) {
+        $this->_otimizado = (bool) $_ot;
+    }
+
+    public function deleteTag($_id) {
+        unset($this->_tags[$_id]);
+    }
+
+    public function toHTML() {
+        $_html = "";
+        foreach($this->_tags as $_tag) {
+            $_html .= $_tag->toHTML($this->_otimizado);
+        }
+        return $_html;
+    }
+
+}
 
 /**
  * Define os tipos de TAG HTML disponiveis
