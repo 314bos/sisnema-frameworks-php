@@ -38,7 +38,7 @@ class tipotag {
 	protected $_nome;
 	protected $_finaliza = true;
 
-	public function __construct($nome, $finaliza) {
+	public function __construct($nome, $finaliza = true) {
 
 
 		$this->_nome = $nome;
@@ -147,7 +147,7 @@ public function getTipo($_tipo) {
 
 
 
-	return $this->_tipos[$_tipo];
+	return $this->_tipos[strtoupper($_tipo)];
 }
 }
 
@@ -238,7 +238,7 @@ class tag {
 
     public function getTipo() {
 
-    	return $this->_tipo
+    	return $this->_tipo;
 
     }
 
