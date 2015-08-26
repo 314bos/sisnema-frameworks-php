@@ -142,42 +142,74 @@ class tag {
         return $this;
     }
 
-    public function setValor() {
+    public function setValor($valor) {
+    	$this->_valor = $valor;
+    }
+
+    public function append($valor) {
+    	$this->_valor .= $valor;
+    }
+
+    public function addAtributo(atributo $_atributo = null) {
+
+    	$this->_atributos[] = $_atributo;
+    	return sizeof($this->_atributos)-1;
 
     }
 
-    public function append() {
+    public function deleteAtributo($atributo) {
 
-    }
-
-    public function addAtributo() {
-    }
-
-    public function deleteAtributo() {
+    	unset($this->_atributos[$atributo]);
 
     }
 
     public function clearAtributos() {
 
-    }
-
-    public function addSubTag() {
+    	$this->_atributos = array();
 
     }
 
-    public function deleteSubTag() {
+    public function addSubTag(tag $subtag) {
+
+    	$this->_subtags[] = $subtag;
+    	return sizeof($this->_subtags)-1;
+
+    }
+
+    public function deleteSubTag($id) {
+
+    	unset($this->_subtags[$id]);
 
     }
 
     public function clearSubTags() {
 
+    	$this->_subtags = array();
+
     }
 
     public function toHTML() {
 
+    	$_html = "<{$this->_tipo->getNome()}";
+
+    	foreach ($this->_atributos as $attr) {
+    		$_html .= $attr->getAtributo();
+    	}
+
+    	$_html .= ">{$this->_valor}";
+
+    	foreach($this->_subtags as $sbtag){
+    		$_html .= $sbtag->toHTML();
+    	}
+
+    	$_html .= ($this->_tipo->getFinaliza() === true ? "</{$this->_tipo->getNome()}>" : "");
+
+    	return $_html;
     }
 
     public function getTipo() {
+
+    	return $this->_tipo
 
     }
 
@@ -188,6 +220,8 @@ class tag {
     public function getLastSubTag() {
 
     }
+
+    
 
 }
 
