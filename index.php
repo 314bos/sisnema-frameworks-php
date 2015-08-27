@@ -1,28 +1,15 @@
 <?php
 
 
-require_once('classes/classe_bancodados.inc');
+
+require_once('classes/autoload.carlos.php');
 
 
-
-$bd = new mysql('localhost','root');
-
-
-
-$articles = $bd->executaSQL( "select * from cake.articles");
-
-$line = '';
-
-while($obj = $articles->fetch_object()){
-	$line.=$obj->id;
-	$line.=$obj->title;
-	$line.=$obj->body;
-	$line.="<br>";
-}
-
-echo $line;
+$controller = $_GET['controller'] . "controller";
+$action     = $_GET['action'];
 
 
+$objController = new $controller();
+$objController->$action();
 
-?>
-
+// include('views/'  $controller . '/' . $action . '.php')
